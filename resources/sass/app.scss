@@ -1,0 +1,385 @@
+@import 'reset';
+@import 'asset';
+@import 'component';
+
+.auth {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100lvh;
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: -1;
+        background: radial-gradient($white 30%, rgba($light-red, .5) 60%, rgba($orange, .9));
+        animation: venyet 4s ease-in;
+    }
+    > img {
+        position: absolute;
+        object-fit: cover;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: -1;
+        filter: grayscale(.2);
+        animation: venyet 10s ease-in;
+    }
+    .container {
+        display: flex;
+        align-items: center;
+        gap: 2.3em;
+        padding: 3em;
+    }
+    .container > img {
+        width: 15em;
+    }
+    .container .form {
+        width: 22em;
+    }
+    .container .form .title {
+        margin: 0 0 .2em;
+        color: $dark-red;
+    }
+    .container .form .button {
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: .1em;
+        width: 100%;
+        margin: .6em 0 0;
+    } 
+    @keyframes venyet {
+        from {opacity: 0;}
+        to {opacity: 1;}
+    }
+}
+
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+    & > section.sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 3em;
+        width: 100%;
+        max-width: 18em;
+        padding: 3em;
+        background: linear-gradient($light-red, lighten($orange, 20%));
+        box-shadow: 1em 0 2em rgba($white, .2);
+        .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: .5em;
+        }
+        .profile img {
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            width: 70%;
+            margin: 0 0 .8em;
+            border-radius: 50%;
+            border: .1em solid $gray;
+        }
+        .menu {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+        }
+        .menu .menu-item {
+            display: flex;
+            gap: 1em;
+            align-items: center;
+            color: $darker;
+            &:hover {
+                color: $dark-red;
+            }
+        }
+        .menu .menu-item i {
+            width: 1.3em;
+        }
+        .logout {
+            margin-top: auto;
+        }
+        .logout .button {
+            width: 100%;
+            background: $dark-red;
+        }
+    }
+    & > section.content {
+        position: relative;
+        width: 100%;
+        padding: 3em 4em;
+        > .title {
+            margin: 0 0 1em;
+        }
+        & > nav {
+            display: flex;
+            gap: 1em;
+            a {
+                padding: 0 0 .3em;
+            }
+            a.active {
+                border-bottom: 2px solid $dark;
+            }
+        }
+    }
+}
+
+.profile {
+    .form {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .form .avatar {
+        width: 18%;
+    }
+    .form .avatar img {
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        width: 10em;
+        border: .1em solid $gray;
+        border-radius: 50%;
+    }
+    .form .detail {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 3%;
+        row-gap: 1.5em;
+        width: 78%;
+    }
+    .form .detail header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1em;
+        width: 100%;
+    }
+    .form .detail header a.button {
+        font-size: .8em;
+    }
+    .form .detail .input {
+        width: 48.5%;
+        &:last-child {
+            width: 100%;
+        }
+    }
+    .form .buttons {
+        margin: 2em 0 0 auto;
+    }
+}
+.transaksi-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 4%;
+    row-gap: 2em;
+    margin: 2em 0 0;
+    .form {
+        width: 48%;
+    }
+    .form .buttons {
+        margin: 1em 0 0 auto;
+    }
+    .table {
+        width: 100%;
+    }
+    .table .action {
+        padding: .2em 0 0;
+    }
+    .table td.total {
+        padding: 1em;
+        background: rgba($orange, .2);
+    }
+    > .buttons {
+        margin: auto;
+    }
+    .error {
+        width: 100%;
+        font-size: .9em;
+        color: $danger;
+    }
+}
+.dashboard-index {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    .table {
+        font-size: .9em;
+    }
+    .table td {
+        vertical-align: middle;
+    }
+    .table td ul {
+        padding: 0;
+    }
+    .table td ul li {
+        list-style: none;
+    }
+    .graphics {
+        display: flex;
+        justify-content: space-between;
+        gap: 2em;
+        .category {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1em;
+            padding: 1em;
+            border-radius: .5em;
+            height: 20em;
+            width: 48%;
+            border: 1px solid rgba($gray, .5);
+        }
+        .category .chart {
+            flex-direction: row;
+            align-items: end;
+            padding: 0;
+            gap: .8em;
+            height: 100%;
+        }
+        .category .chart li {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: end;
+            list-style: none;
+            gap: .5em;
+            height: 100%;
+            span {
+                display: flex;
+                align-items: end;
+                justify-content: center;
+                width: 4em;
+                background: #00000010;
+                small {
+                    font-size: .5em;
+                    padding: .5em;
+                }
+            }
+        }
+    }
+    .stock {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        .table {
+            width: 100%;
+        }
+        .table thead th {
+            white-space: nowrap;
+        }
+        .table tbody td:not(:nth-child(1)) {
+            white-space: nowrap;
+        }
+    }
+    .add {
+        align-self: end;
+        padding: .8em;
+        border-radius: 50%;
+        background: linear-gradient($orange, $red);
+        color: $white;
+    }
+    .status {
+        display: flex;
+        justify-content: center;
+        gap: .5em;
+        width: 100%;
+    }
+    .status > span {
+        display: block;
+        font-size: .9em;
+        text-align: center;
+        min-width: 9em;
+        padding: .2em 1em;
+        border-radius: 2em;
+        &.success {
+            background: $success;
+        }
+        &.warning {
+            background: $warning;
+        }
+        &.danger {
+            display: flex;
+            justify-content: center;
+            gap: .7em;
+            background: lighten($danger, 10%);
+            i {
+                font-size: 1em;
+            }
+        }
+    }
+    .status i {
+        font-size: 2em;
+        &.fa-circle-xmark {
+            color: red;
+        }
+        &.fa-circle-check {
+            color: #26d026;
+        }
+    }
+    .status .button {
+        background: transparent;
+        padding: 0;
+        border: none;
+    }
+}
+.dashboard-form {
+    .form .buttons {
+        align-self: flex-end;
+        margin: 1em 0 0;
+    }
+    .form .action {
+        display: flex;
+        gap: .4em;
+    }
+}
+.dashboard-show {
+    .list {
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
+        padding: 0;
+    }
+    .list .item {
+        display: flex;
+        flex-direction: column;
+        gap: .5em;
+    }
+    .list .item small {
+        font-weight: 600;
+        color: $dark-red;
+    }
+    a.button {
+        float: right;
+        margin: 3em 0 0;
+    }
+}
+.dashboard-modal {
+    .container {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        padding: 2em;
+    }
+    .container .title {
+        padding: 0 0 .6em;
+        border-bottom: 1px dashed rgba($gray, .5);
+    }
+    .container table tr td {
+        padding: .2em;
+        border: none;
+        &:first-child {
+            font-weight: 600;
+        }
+    }
+}

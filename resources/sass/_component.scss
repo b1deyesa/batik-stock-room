@@ -1,0 +1,468 @@
+/*
+| --------------------------------------------
+|   Form
+| --------------------------------------------
+*/
+    .form {
+        display: flex;
+        flex-direction: column;
+        font-size: $font-size;
+        gap: 1.2em;
+    }
+/*
+| --------------------------------------------
+|   Input
+| --------------------------------------------
+*/
+    .input {
+        display: flex;
+        flex-direction: column;
+        font-size: $font-size;
+        gap: .4em;
+        .label {
+            font-family: $font-family;
+            font-size: $font-size - .05;
+            margin: 0 0 .2em;
+            color: $dark;
+            .required {
+                color: darken($danger, 20%);
+            }
+        }
+        .error {
+            color: darken($danger, 20%);
+        }
+        .select {
+            position: relative;
+            border: 1px solid $dark;
+            border-radius: $border-radius;
+            border-color: rgba($dark, .5);
+            background: transparent;
+            &:has(select:focus) {
+                border-color: $dark;
+            }
+            &::after {
+                content: '\25be';
+                position: absolute;
+                display: flex;
+                align-items: center;
+                pointer-events: none;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                padding: 0 $padding;
+            }
+            select {
+                appearance: none;
+                width: 100%;
+                border: none;
+                background: transparent;
+                & > option {
+                    color: $black;
+                }
+                & option[value=""], 
+                & option:not([value]),
+                &:not([data-empty="false"]) {
+                    color: $dark;
+                }
+            }
+            &:has(select:disabled) {
+                border-color: rgba($gray, .5);
+            }
+            &.danger {
+                border-color: $danger;
+            }
+        }
+        .radio {
+            display: flex;
+            flex-direction: column;
+            gap: .3em;
+            label {
+                display: flex;
+                align-items: center;
+                gap: .5em;
+                width: fit-content;
+                cursor: pointer;
+                &::before {
+                    content: '';
+                    position: relative;
+                    display: inline-block;
+                    aspect-ratio: 1/1;
+                    width: 1em;
+                    border: 1px solid rgba($dark, .5);
+                    border-radius: 50%;
+                    background: $white;
+                }
+                &::after {
+                    content: '';
+                    position: absolute;
+                    display: none;
+                    aspect-ratio: 1/1;
+                    width: .5em;
+                    margin: 0 0 0 .25em;
+                    border: 1px solid $black;
+                    border-radius: 50%;
+                    background: $black;
+                }
+                &:has(input:checked) {
+                    &::before {
+                        border-color: $black;
+                    }
+                    &::after  {
+                        display: inline-block;
+                    }
+                }
+                input {
+                    display: none;
+                }
+            }
+        }
+        .checkbox {
+            display: flex;
+            flex-direction: column;
+            gap: .3em;
+            label {
+                display: flex;
+                align-items: center;
+                gap: .5em;
+                width: fit-content;
+                cursor: pointer;
+                &::before {
+                    content: '';
+                    position: relative;
+                    display: inline-block;
+                    aspect-ratio: 1/1;
+                    width: 1em;
+                    border: 1px solid rgba($dark, .5);
+                    border-radius: $border-radius;
+                    background: $white;
+                }
+                &::after {
+                    content: '\2713';
+                    position: absolute;
+                    display: none;
+                    font-size: .7em;
+                    margin: .1em 0 0 .38em;
+                    color: $white;
+                }
+                &:has(input:checked) {
+                    &::before {
+                        background: $black;
+                    }
+                    &::after  {
+                        display: inline-block;
+                    }
+                }
+                input {
+                    display: none;
+                }
+            }
+        }
+        .file,
+        .multiple-file {
+            display: flex;
+            flex-direction: column;
+            gap: .4em;
+            input {
+                cursor: pointer;
+            }
+            .preview {
+                display: flex;
+                gap: .5em;
+            }
+            .preview .input {
+                width: 100%;
+            }
+            .preview .tools {
+                position: relative;
+            }
+            .preview .tools > button {
+                background: $white;
+                border-color: $gray;
+                height: 100%;
+            }
+            .preview .tools .tool-list {
+                position: absolute;
+                top: 3.5em;
+                right: 0;                
+                padding: 0;
+                border: 1px solid $gray;
+                box-shadow: 3px 3px 10px #00000040;
+                border-radius: $border-radius;
+                z-index: 10;
+                background: $white;
+            }
+            .preview .tools .tool-list li {
+                list-style: none;
+                padding: ($padding - .7) ($padding - .3);
+                cursor: pointer;
+                &:first-child {
+                    padding-top: $padding - .3;
+                }
+                &:last-child {
+                    padding-bottom: $padding - .3;
+                }
+            }
+        }
+        .multiple-file {
+            .list {
+                display: flex;
+                flex-direction: column;
+                gap: .5em;
+                padding: 1em;
+                border: 1px solid $gray;
+                border-radius: $border-radius;
+                background: $lighter;
+            }
+            .list .add {
+                display: flex;
+                align-self: end;
+                align-items: center;
+                gap: .5em;
+                margin: 1em 0 0;
+                padding: .2em .8em;
+                border-color: $gray;
+                background: $white;
+            }
+        }
+        .editor {
+            .ck {
+                .ck-content {
+                    min-height: 20em;
+                    padding: 1em 2em;
+                }
+            }
+        }
+        input,
+        textarea {
+            width: 100%;
+            background: transparent;
+            border-color: rgba($dark, .5);
+            &:focus {
+                border-color: $dark;
+            }
+            &.danger {
+                border-color: $danger;
+            }
+            &:disabled {
+                border-color: rgba($dark, .3);
+                color: $gray;
+            }
+        }
+    }
+/*
+| --------------------------------------------
+|   Button
+| --------------------------------------------
+*/
+    .buttons {
+        display: flex;
+        gap: .7em;
+    }
+    .buttons .button {
+        min-width: 6em;
+    }
+    .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        line-height: $line-height - .1435;
+        font-size: $font-size;
+        width: fit-content;
+        padding: ($padding - .5) ($padding - .2);
+        border: 1px solid $dark-red;
+        border-radius: $border-radius;
+        background: $dark-red;
+        color: $white;
+        &#disabled {
+            pointer-events: none;
+            border-color: $gray !important;
+            color: $gray !important;
+        }
+        &:hover {
+            text-decoration: none;
+            color: $white;
+        }
+        &.transparent {
+            border-color: $dark-red;
+            background: transparent;
+            color: $dark-red;
+        }
+    }
+    a.file {
+        display: flex;
+        align-items: center;
+        gap: .8em;
+    }
+/*
+| --------------------------------------------
+|   Modal
+| --------------------------------------------
+*/
+    .trigger {
+        cursor: pointer;
+    }
+    .modal {
+        position: fixed;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: $font-size;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        min-height: 100vh;
+        width: 100vw;
+        z-index: 100;
+        background: rgba($black, .8);
+        .container {
+            position: relative;
+            max-height: 80%;
+            max-width: 80%;
+            padding: $padding $padding ($padding - .1);
+            border-radius: $border-radius;
+            background: $lighter;
+            .close {
+                position: absolute;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                aspect-ratio: 1/1;
+                top: -2em;
+                right: -2em;
+                float: right;
+                width: 2em;
+                cursor: pointer;
+                border-radius: 50%;
+                background: rgba($white, .9);
+                box-shadow: 3px 3px 5px rgba($black, .1);
+                color: $black;
+            }
+            > header {
+                font-family: $font-family;
+                font-size: 1.2em;
+                font-weight: $font-weight + 200;
+                margin: .5em 0 1.5em;
+            }
+            .form {
+                min-width: 20em;
+                .button {
+                    align-self: end
+                }
+                .buttons {
+                    display: flex;
+                    align-self: end;
+                    align-items: center;
+                    justify-content: end;
+                    gap: .5em;
+                    margin: 1em 0 0;
+                }
+                .buttons.space {
+                    width: 100%;
+                    justify-content: space-between;
+                }
+            }
+        }
+    }
+/*
+| --------------------------------------------
+|   Table
+| --------------------------------------------
+*/
+    .table {
+        font-size: $font-size - .05;
+        thead {
+            background: $dark-red;
+            color: $white;
+        }
+        thead tr th {
+            font-size: .9em;
+        }
+        thead tr th:not(:last-child) {
+            border-right-color: $light-red;
+        }
+        tbody tr.new {
+            background: rgba($warning, .5);
+        }
+        tbody tr td {
+            vertical-align: top;
+            padding: ($padding - .5) ($padding - .3);
+        }
+        tbody tr td .action {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5em;
+            user-select: none;
+        }
+        tbody tr td .action .button {
+            padding: 0;
+            border-color: transparent;
+            background: transparent;
+            color: $dark;
+        }
+        tbody tr td.empty {
+            font-size: .9em;
+            text-align: center;
+            padding: 2em 0;
+            color: $gray;
+        }
+    }
+/*
+| --------------------------------------------
+|   Alert
+| --------------------------------------------
+*/
+    .alert {
+		position: fixed;
+		display: flex;
+		flex-direction: column;
+		align-items: end;
+		justify-content: center;
+        pointer-events: none;
+        font-size: .9em;
+		top: 2em;
+		right: 0;
+		left: 0;
+		gap: 1em;
+		opacity: 0;
+		visibility: hidden;
+		animation: fadeIn 10s;
+        z-index: 200;
+		.alert-container {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-between;
+			gap: 1em;
+			min-height: 4em;
+			width: 25em;
+			padding: ($padding - .2) ($padding + .8);
+			border-radius: $border-radius;
+			background: $light;
+			border: 1px solid $gray;
+			.close {
+				cursor: pointer;
+                pointer-events: visible;
+			}
+			&.success {
+				background: $success;
+				border-color: darken($success, 20%);
+			}
+			&.warning {
+				background: $warning;
+				border-color: darken($warning, 30%);
+			}
+			&.danger {
+				background: lighten($danger, 10%);
+				border-color: darken($danger, 5%);
+			}
+		}
+		@keyframes fadeIn {
+			0%   { visibility: hidden; opacity: 0; transform: translateX(0); }
+			10%  { visibility: visible; opacity: 1; transform: translateX(-2em); }
+			90%  { visibility: visible; opacity: 1; transform: translateX(-2em); }
+			100% { visibility: hidden; opacity: 0; transform: translateX(0); }
+		}
+	}
