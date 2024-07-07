@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Charts\BestSellerChart;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
 {
@@ -29,9 +30,15 @@ class IndexController extends Controller
             ->groupBy(DB::raw("DATE_FORMAT(created_at, '%d/%m')"))
             ->orderBy(DB::raw("DATE_FORMAT(created_at, '%d/%m')"))
             ->get();
-            
+        
+        $inventroies = Inventory::all();
+        
+        if (Auth::user()->role->id == 2) {
+            $inventroies = Inventory::where('user_id', Auth::user()->id)->get();
+        }
+        
         return view('page.dashboard.index', [
-            'inventories' => Inventory::all(),
+            'inventories' => $inventroies,
             'BestSellers' => $BestSellers,
             'SellHistory' => $SellHistory
         ]);
