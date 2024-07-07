@@ -4,7 +4,7 @@
     <x-form>
         <h6 class="title">Transaction</h6>
         <x-input type="text" label="No. Transaksi" wire="no_transaksi" :disabled="true" />
-        <x-input type="select" label="ID Anggota" wire="user" :options="$anggotas" placeholder=" " :required="true" />
+        <x-input type="select" label="ID Anggota" wire="user" :options="$anggotas" placeholder=" " :required="true" :disabled="Auth::user()->role->id == 2 ? true : false" />
         <x-input type="text" label="Tanggal" wire="tanggal" :disabled="true" />
     </x-form>
     

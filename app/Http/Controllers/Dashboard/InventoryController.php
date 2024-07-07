@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Inventory;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class InventoryController extends Controller
 {
@@ -14,6 +15,12 @@ class InventoryController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->role->id == 2) {
+            return view('page.dashboard.inventory.index', [
+                'inventories' => Inventory::where('user_id', Auth::user()->id)->get()
+            ]);
+        }
+        
         return view('page.dashboard.inventory.index', [
             'inventories' => Inventory::all()
         ]);
@@ -102,6 +109,12 @@ class InventoryController extends Controller
     
     public function report()
     {
+        if (Auth::user()->role->id == 2) {
+            return view('page.dashboard.inventory.report', [
+                'inventories' => Inventory::where('user_id', Auth::user()->id)->get()
+            ]);
+        }
+        
         return view('page.dashboard.inventory.report', [
             'inventories' => Inventory::all()
         ]);

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 Route::namespace('App\Http\Controllers\Auth')->name('auth.')->group( function () {
     Route::get('/', 'LoginController@index')->name('login.index');
     Route::post('/', 'LoginController@post')->name('login.post');
-    Route::get('/register', 'RegisterController@index')->name('register.index');
+    // Route::get('/register', 'RegisterController@index')->name('register.index');
     Route::post('/register', 'RegisterController@post')->name('register.post');
     Route::post('/logout', 'LogoutController@post')->name('logout.post');
 });

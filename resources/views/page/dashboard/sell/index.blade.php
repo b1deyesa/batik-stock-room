@@ -3,8 +3,12 @@
     {{-- Navbar --}}
     <nav>
         <a href="{{ route('dashboard.buy.index') }}">Buy</a>
-        <a href="{{ route('dashboard.sell.index') }}" class="active">Sell</a>
-        <a href="{{ route('dashboard.requestion.index') }}">Request</a>
+        @if (Auth::user()->role->id == 1)
+            <a href="{{ route('dashboard.sell.index') }}" class="active">Sell</a>
+        @endif
+        @if (Auth::user()->role->id == 2)
+            <a href="{{ route('dashboard.requestion.index') }}">Request</a>
+        @endif
         <a href="{{ route('dashboard.returned.index') }}">Return</a>
         <a href="{{ route('dashboard.buy.report') }}">Report</a>
     </nav>

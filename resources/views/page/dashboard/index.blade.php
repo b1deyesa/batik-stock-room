@@ -1,30 +1,32 @@
 <x-layout.dashboard class="dashboard-index">
     
     {{-- Graphics --}}
-    <div class="graphics">
-        <div class="category">
-            <h5 class="title">Best Sellers</h5>
-            <ul class="chart">
-                @foreach ($BestSellers as $customer)
-                    <li>
-                        <span style="height: {{ $customer->total_purchase / $BestSellers->first()->total_purchase * 100 }}%"><small>{{ $customer->total_purchase }}</small></span>
-                        <small>{{ $customer->first_name }}</small>
-                    </li>
-                @endforeach
-            </ul>
+    @if (Auth::user()->role->id == 1)
+        <div class="graphics">
+            <div class="category">
+                <h5 class="title">Best Sellers</h5>
+                <ul class="chart">
+                    @foreach ($BestSellers as $customer)
+                        <li>
+                            <span style="height: {{ $customer->total_purchase / $BestSellers->first()->total_purchase * 100 }}%"><small>{{ $customer->total_purchase }}</small></span>
+                            <small>{{ $customer->first_name }}</small>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+            <div class="category">
+                <h5 class="title">Sell History</h5>
+                <ul class="chart">
+                    @foreach ($SellHistory as $transaksi)
+                        <li>
+                            <span style="height: {{ $transaksi->total_transaksi / 500000 * 100 }}%"><small>{{ $transaksi->total_transaksi }}</small></span>
+                            <small>{{ $transaksi->date }}</small>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
         </div>
-        <div class="category">
-            <h5 class="title">Sell History</h5>
-            <ul class="chart">
-                @foreach ($SellHistory as $transaksi)
-                    <li>
-                        <span style="height: {{ $transaksi->total_transaksi / 500000 * 100 }}%"><small>{{ $transaksi->total_transaksi }}</small></span>
-                        <small>{{ $transaksi->date }}</small>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-    </div>
+    @endif
     
     {{-- Stock --}}
     <div class="stock">

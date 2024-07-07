@@ -33,6 +33,10 @@ class Create extends Component
         $this->no_transaksi = $transaksi_code;
         $this->tanggal = today()->format('d F Y');
         
+        if (Auth::user()->role->id == 2) {
+            $this->user = Auth::user()->id;
+        }
+        
         $this->anggotas = User::where('role_id', 2)->get()->pluck('code', 'id')->toArray();
         $this->inventories = Inventory::all()->pluck('code', 'id')->toArray();
     }

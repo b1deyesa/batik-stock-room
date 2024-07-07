@@ -23,12 +23,13 @@
                     $quantitySell = $inventory->detailTransaksis()->whereHas('transaksi', function($query) { $query->where('type', 'sell'); })->get()->sum('quantity');
                     $quantityBuy = $inventory->detailTransaksis()->whereHas('transaksi', function($query) {$query->where('type', 'buy'); })->whereHas('transaksi.requestions', function($query) {$query->where('status', true); })->get()->filter(function($detailTransaksi) {return $detailTransaksi->transaksi->requestions->firstWhere('status', true); })->sum('quantity');
                     $quantityReturned = $inventory->detailTransaksis()->whereHas('transaksi.returneds', function ($query) { $query->where('isReturn', true)->orderBy('id')->take(1); })->get()->sum('quantity');
-                    $quantity = $quantityBuy - $quantitySell + $quantityReturned;
+                    $quantity = $quantityBuy - $quantitySell - $quantityReturned;
                 @endphp
                 <tr>
                     <td width="1%">
                         <div class="action">
                             {{ $inventory->code ?? '-' }}
+                            @if (Auth::user()->role->id == 1)    
                             <x-modal class="dashboard-modal">
                                 <x-slot:trigger>
                                     <i class="fa-solid fa-trash"></i>
@@ -63,6 +64,7 @@
                                     </div>
                                 </x-form>
                             </x-modal>
+                            @endif
                         </div>
                     </td>
                     <td width="100%">{{ $inventory->name ?? '-' }}</td>
@@ -71,6 +73,7 @@
                     <td align="center">
                         <div class="action">
                             {{ $inventory->min_quantity ?? '-' }}
+                            @if (Auth::user()->role->id == 1)
                             <x-modal class="dashboard-modal">
                                 <x-slot:trigger>
                                     <i class="fa-solid fa-pencil"></i>
@@ -98,6 +101,7 @@
                                     </div>
                                 </x-form>
                             </x-modal>
+                            @endif
                         </div>
                     </td>
                     
@@ -113,8 +117,10 @@
     </x-table>
     
     {{-- Add --}}
-    <a href="{{ route('dashboard.inventory.create') }}" class="add">
-        <i class="fa-solid fa-plus"></i>
-    </a>
+    @if (Auth::user()->role->id == 1)
+        <a href="{{ route('dashboard.inventory.create') }}" class="add">
+            <i class="fa-solid fa-plus"></i>
+        </a>
+    @endif
     
 </x-layout.dashboard>

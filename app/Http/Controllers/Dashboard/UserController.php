@@ -109,6 +109,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        $user->transaksis()->delete();
         $user->delete();
         
         return redirect()->route('dashboard.user.index')->with('success', 'Successfuly delete user');

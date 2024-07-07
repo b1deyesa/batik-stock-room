@@ -19,6 +19,13 @@ class ReturnedController extends Controller
             $query->where('status', true); })->orWhereHas('returneds', function ($query) {
             $query->where('status', false)
                   ->whereNull('id'); })->get();
+                  
+        if (Auth::user()->role->id == 2) {
+            return view('page.dashboard.returned.index', [
+                'transaksis' => $transaksis->where('user_id', Auth::user()->id),
+                'returneds' => Returned::where('user_id', Auth::user()->id)->get()
+            ]);
+        }
         
         return view('page.dashboard.returned.index', [
             'transaksis' => $transaksis,

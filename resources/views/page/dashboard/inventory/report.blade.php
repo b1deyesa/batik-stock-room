@@ -67,9 +67,4 @@
         </x-slot:body>
     </x-table>
     
-    {{-- Add --}}
-    <a href="{{ route('dashboard.inventory.create') }}" class="add">
-        <i class="fa-solid fa-plus"></i>
-    </a>
-    
 </x-layout.dashboard>

@@ -3,7 +3,9 @@
     {{-- Navbar --}}
     <nav>
         <a href="{{ route('dashboard.buy.report') }}">Report Buy</a>
-        <a href="{{ route('dashboard.sell.report') }}" class="active">Report Sell</a>
+        @if (Auth::user()->role->id == 1)
+            <a href="{{ route('dashboard.sell.report') }}" class="active">Report Sell</a>
+        @endif
     </nav>
     
     {{-- Filter --}}

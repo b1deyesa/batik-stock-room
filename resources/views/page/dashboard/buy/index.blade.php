@@ -3,8 +3,12 @@
     {{-- Navbar --}}
     <nav>
         <a href="{{ route('dashboard.buy.index') }}" class="active">Buy</a>
-        <a href="{{ route('dashboard.sell.index') }}">Sell</a>
-        <a href="{{ route('dashboard.requestion.index') }}">Request</a>
+        @if (Auth::user()->role->id == 1)
+           <a href="{{ route('dashboard.sell.index') }}">Sell</a>
+        @endif
+        @if (Auth::user()->role->id == 2)
+            <a href="{{ route('dashboard.requestion.index') }}">Request</a>
+        @endif
         <a href="{{ route('dashboard.returned.index') }}">Return</a>
         <a href="{{ route('dashboard.buy.report') }}">Report</a>
     </nav>
@@ -26,12 +30,14 @@
             @forelse ($transaksis as $transaksi)
                 <tr>
                     <td width="1%">
-                        <div class="action">
-                            <a href="{{ route('dashboard.buy.edit', ['buy' => $transaksi]) }}" class="button"><i class="fa-solid fa-pencil"></i></a>
-                            <x-form action="{{ route('dashboard.buy.destroy', ['buy' => $transaksi]) }}" method="DELETE">
-                                <x-button type="submit"><i class="fa-solid fa-trash"></i></x-button>
-                            </x-form>
-                        </div>
+                        @if (Auth::user()->role->id == 1)
+                            <div class="action">
+                                <a href="{{ route('dashboard.buy.edit', ['buy' => $transaksi]) }}" class="button"><i class="fa-solid fa-pencil"></i></a>
+                                <x-form action="{{ route('dashboard.buy.destroy', ['buy' => $transaksi]) }}" method="DELETE">
+                                    <x-button type="submit"><i class="fa-solid fa-trash"></i></x-button>
+                                </x-form>
+                            </div>
+                        @endif
                     </td>
                     <td align="center">{{ $transaksi->code ?? '-' }}</td>
                     <td align="center">{{ $transaksi->user->code ?? '-' }}</td>
@@ -103,8 +109,10 @@
     </x-table>
     
     {{-- Add --}}
-    <a href="{{ route('dashboard.buy.create') }}" class="add">
-        <i class="fa-solid fa-plus"></i>
-    </a>
+    @if (Auth::user()->role->id == 1)
+        <a href="{{ route('dashboard.buy.create') }}" class="add">
+            <i class="fa-solid fa-plus"></i>
+        </a>
+    @endif
     
 </x-layout.dashboard>

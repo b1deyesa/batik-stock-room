@@ -15,9 +15,19 @@
                     <td width="1%">
                         <div class="action">
                             <a href="{{ route('dashboard.customer.edit', compact('customer')) }}" class="button"><i class="fa-solid fa-pencil"></i></a>
-                            <x-form action="{{ route('dashboard.customer.destroy', compact('customer')) }}" method="DELETE">
-                                <x-button type="submit"><i class="fa-solid fa-trash"></i></x-button>
-                            </x-form>
+                            <x-modal class="dashboard-modal">
+                                <x-slot:trigger>
+                                    <x-button><i class="fa-solid fa-trash"></i></x-button>
+                                </x-slot:trigger>
+                                <h6 class="title">Delete Customer</h6>
+                                Konfirmasi menghapus customer {{ $customer->code }}
+                                <x-form action="{{ route('dashboard.customer.destroy', compact('customer')) }}" method="DELETE">
+                                    <div class="buttons">
+                                        <a href="{{ route('dashboard.customer.index') }}" class="button transparent">Cancel</a>
+                                        <x-button type="submit">Accept</x-button>
+                                    </div>
+                                </x-form>
+                            </x-modal>
                             <a href="{{ route('dashboard.customer.show', compact('customer')) }}" class="button"><i class="fa-solid fa-eye"></i></a>
                         </div>
                     </td>
