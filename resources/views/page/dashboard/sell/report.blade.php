@@ -24,7 +24,7 @@
             <th style="white-space: nowrap">Tanggal</th>
             <th style="white-space: nowrap">No. Transaksi</th>
             <th style="white-space: nowrap">Nama Batik</th>
-            <th style="white-space: nowrap">ID Anggota</th>
+            <th style="white-space: nowrap">ID Customer</th>
             <th style="white-space: nowrap">Qty.</th>
             <th style="white-space: nowrap">Harga</th>
             <th style="white-space: nowrap">Total</th>
@@ -41,7 +41,7 @@
                             </ul>
                         @endforeach
                     </td>
-                    <td align="center">{{ $transaksi->user->code }}</td>
+                    <td align="center">{{ $transaksi->buyer }}</td>
                     <td align="center">
                         @foreach ($transaksi->detailTransaksis as $detailTransaksi)
                             <ul>

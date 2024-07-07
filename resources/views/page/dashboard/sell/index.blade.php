@@ -35,7 +35,7 @@
                         </div>
                     </td>
                     <td align="center">{{ $transaksi->code ?? '-' }}</td>
-                    <td align="center">{{ $transaksi->getCustomer($transaksi->user->id) ?? '-' }}</td>                    
+                    <td align="center">{{ $transaksi->buyer ?? '-' }}</td>                    
                     <td align="center">{{ $transaksi->created_at->format('d/m/Y') ?? '-' }}</td>
                     <td width="100%" style="white-space: nowrap">{{ "Rp " . number_format($transaksi->grandtotal, 2, ',', '.'); }}</td>
                     <td align="center">

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->char('code', 7)->unique();
             $table->enum('type', ['Buy', 'Sell']);
             $table->string('grandtotal');
+            $table->string('buyer')->nullable();
             $table->timestamps();
         });
     }

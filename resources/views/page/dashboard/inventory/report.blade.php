@@ -35,6 +35,7 @@
                                         <th>No. Transaction</th>
                                         <th>Type</th>
                                         <th>Qty.</th>
+                                        <th>Status</th>
                                     </tr>
                                     @forelse ($inventory->detailTransaksis as $detailTransaksi)
                                         <tr>
@@ -45,6 +46,15 @@
                                                     -{{ $detailTransaksi->quantity }}
                                                 @else
                                                     {{ $detailTransaksi->quantity }}
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($detailTransaksi->transaksi->returneds->first()?->isReturn == true)
+                                                    Return
+                                                @elseif ($detailTransaksi->transaksi->requestions->first()?->status == true)
+                                                    Berhasil
+                                                @else
+                                                    Process
                                                 @endif
                                             </td>
                                         </tr>

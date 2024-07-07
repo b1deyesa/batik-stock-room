@@ -2,11 +2,12 @@
 
 namespace App\Livewire\Dashboard\Sell;
 
-use App\Models\Customer;
 use Livewire\Component;
+use App\Models\Customer;
 use App\Models\Inventory;
 use App\Models\Transaksi;
 use App\Models\DetailTransaksi;
+use Illuminate\Support\Facades\Auth;
 
 class Create extends Component
 {
@@ -92,11 +93,14 @@ class Create extends Component
             'total' => 'required|not_in:0'
         ]);
         
+        $customer_code = Customer::find($this->customer)->code;
+        
         $transaksi = Transaksi::create([
-            'user_id' => $this->customer,
+            'user_id' => Auth::user()->id,
             'code' => $this->no_transaksi,
             'type' => 'Sell',
-            'grandtotal' => $this->total
+            'grandtotal' => $this->total,
+            'buyer' => $customer_code
         ]);
         
         foreach ($this->products as $product) {

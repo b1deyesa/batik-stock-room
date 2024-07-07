@@ -32,9 +32,4 @@ class Transaksi extends Model
     {
         return $this->hasMany(Returned::class);
     }
-    
-    public function getCustomer($id)
-    {
-        return Customer::find($id)->code;
-    }
 }
