@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use Barryvdh\DomPDF\Facade\PDF;
+use Barryvdh\DomPDF\Facade\PDF as PDF;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
