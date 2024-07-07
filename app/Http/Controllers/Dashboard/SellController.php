@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use Carbon\Carbon;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade\PDF as PDF;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use App\Http\Controllers\Controller;
 
 class SellController extends Controller
